@@ -11,6 +11,8 @@ interface Listing {
   MLSnumber: string;
   photo: string;
   description: string;
+  isSold?: boolean;
+  currentOwner?: string;
   propertySummary: {
     propertyType: string;
     buildingType: string;
@@ -526,6 +528,13 @@ console.log(listing0);
  * Make sure to add them as OPTIONAL properties
  */
 //WRITE YOUR CODE BELOW
+const listing0Updated: Listing = {
+  ...listing0,
+  isSold: false,
+  currentOwner: "Jane Doe",
+};
+
+console.log(listing0Updated);
 
 /**
  * NOTE: THIS TASK IS TRICKY!
@@ -544,6 +553,19 @@ console.log(listing0);
  */
 //WRITE YOUR CODE BELOW
 
+function realtorFees(listing: Listing): number {
+  let price = parseInt(listing.price.replace("$", "").replace(",", ""));
+
+  // prettier-ignore
+  price <= 450000 
+  ? (price = price * 0.025) 
+  : (price = price * 0.02);
+  return price;
+}
+
+console.log(realtorFees(listings[2]));
+console.log(realtorFees(listings[6]));
+
 console.log(
   parseInt(listings[2].price.replace("$", "").replace(",", "")) * 0.02,
 );
@@ -555,6 +577,14 @@ console.log(
  */
 //WRITE YOUR CODE BELOW
 
+let listingAscendingly: Listing[] = listings.sort((a, b) => {
+  const yearA = parseInt(a.propertySummary.builtIn);
+  const yearB = parseInt(b.propertySummary.builtIn);
+  return yearA - yearB;
+});
+
+console.log(listingAscendingly);
+
 /**
  * Task-6:
  * Filter all the listings by houseType
@@ -563,3 +593,10 @@ console.log(
  * This array should result in two listings only
  */
 //WRITE YOUR CODE BELOW
+
+let filteredListings: Listing[] = listings.filter((listing) => {
+  let townhouseListings = listing.propertySummary.buildingType === "Townhouse";
+  return townhouseListings;
+});
+
+console.log(filteredListings);
