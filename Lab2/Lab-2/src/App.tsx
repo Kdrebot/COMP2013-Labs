@@ -1,6 +1,6 @@
 import "./App.css";
 import ResortContainer from "./assets/Components/ResortContainer";
-import listings from "./assets/Components/Data/data";
+import listings from "./Data/data";
 
 function App() {
   return (
